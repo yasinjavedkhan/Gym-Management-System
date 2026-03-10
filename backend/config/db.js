@@ -1,13 +1,16 @@
 const { Sequelize } = require('sequelize');
 
-console.log('Attempting to connect to gym_db on 127.0.0.1 as root with NO password...');
+const dbHost = process.env.DB_HOST || '127.0.0.1';
+const dbName = process.env.DB_NAME || 'gym_db';
+
+console.log(`Connecting to ${dbName} on ${dbHost}...`);
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME || 'gym_db',
+  dbName,
   process.env.DB_USER || 'root',
   process.env.DB_PASSWORD || '',
   {
-    host: process.env.DB_HOST,
+    host: dbHost,
     dialect: 'mysql',
     logging: false,
   }
