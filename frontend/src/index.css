@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+    --color-electric-blue: #007BFF;
+    --color-gym-black: #0A0A0B;
+    --color-gym-gray: #F8F9FA;
+    --font-sans: "Inter", "Outfit", sans-serif;
+    --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+}
+
+@layer base {
+    body {
+        @apply bg-white text-gym-black font-sans antialiased selection:bg-electric-blue selection:text-white;
+    }
+}
+
+.glass-navbar {
+    @apply fixed w-full z-50 bg-white/70 backdrop-blur-2xl border-b border-white/20 shadow-sm transition-all duration-500;
+}
+
+.glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-premium rounded-[2rem];
+}
+
+.text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-gym-black via-gray-700 to-electric-blue;
+}
+
+.btn-premium {
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-electric-blue/20 bg-gym-black text-white px-8 py-4 rounded-full font-black uppercase tracking-widest hover:bg-electric-blue inline-block cursor-pointer text-center;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.section-padding {
+    @apply py-24 px-4 sm:px-6 lg:px-8;
+}
