@@ -1,20 +1,33 @@
 const { Sequelize } = require('sequelize');
 
+const dbUrl = process.env.DATABASE_URL;
 const dbHost = process.env.DB_HOST || '127.0.0.1';
 const dbName = process.env.DB_NAME || 'gym_db';
 
-console.log(`Connecting to ${dbName} on ${dbHost}...`);
+let sequelize;
 
-const sequelize = new Sequelize(
-  dbName,
-  process.env.DB_USER || 'root',
-  process.env.DB_PASSWORD || '',
-  {
-    host: dbHost,
+if (dbUrl) {
+  console.log('Connecting to database using CONNECTION STRING...');
+  sequelize = new Sequelize(dbUrl, {
     dialect: 'mysql',
     logging: false,
+  });
+} else {
+  console.log(`Connecting to ${dbName} on ${dbHost}...`);
+  if (dbHost === '127.0.0.1') {
+    console.log('⚠️ WARNING: Using local host (127.0.0.1). If this is on Render, you MUST set DB_HOST in the dashboard.');
   }
-);
+  sequelize = new Sequelize(
+    dbName,
+    process.env.DB_USER || 'root',
+    process.env.DB_PASSWORD || '',
+    {
+      host: dbHost,
+      dialect: 'mysql',
+      logging: false,
+    }
+  );
+}
 
 const connectDB = async () => {
   try {
