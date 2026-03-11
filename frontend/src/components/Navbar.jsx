@@ -102,7 +102,7 @@ const Navbar = () => {
                                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                                     className="absolute right-0 mt-3 w-52 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 p-2 overflow-hidden z-50"
                                                 >
-                                                    <div className="px-4 py-4 border-b border-gray-50 mb-1 bg-gray-50/50 rounded-t-[2rem]">
+                                                    <div className="px-4 py-3 border-b border-gray-50 bg-gray-50/50 rounded-t-[2rem] mb-1">
                                                         <div className="flex items-center gap-2 mb-1">
                                                             <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
                                                             <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Membership</span>
@@ -112,14 +112,14 @@ const Navbar = () => {
                                                     <Link
                                                         to="/dashboard"
                                                         onClick={() => setIsProfileOpen(false)}
-                                                        className="flex items-center gap-3 w-full p-4 rounded-[2rem] text-sm font-bold hover:bg-gray-50 transition-colors group"
+                                                        className="flex items-center gap-3 w-full p-3 rounded-[1.5rem] text-sm font-bold hover:bg-gray-50 transition-colors group"
                                                     >
                                                         <LayoutGrid size={18} className="text-electric-blue group-hover:scale-110 transition-transform" />
                                                         <span className="tracking-tight text-gym-black">Dashboard</span>
                                                     </Link>
                                                     <button
                                                         onClick={() => { handleLogout(); setIsProfileOpen(false); }}
-                                                        className="flex items-center gap-3 w-full p-4 rounded-[2rem] text-sm font-bold text-red-500 hover:bg-red-50 transition-colors mt-0.5 group"
+                                                        className="flex items-center gap-3 w-full p-3 rounded-[1.5rem] text-sm font-bold text-red-500 hover:bg-red-50 transition-colors group"
                                                     >
                                                         <LogOut size={18} className="group-hover:translate-x-0.5 transition-transform" />
                                                         <span className="tracking-tight">Logout</span>
