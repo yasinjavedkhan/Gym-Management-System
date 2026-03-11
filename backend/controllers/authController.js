@@ -19,7 +19,21 @@ exports.register = async (req, res) => {
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'supersecretgymkey', { expiresIn: '1h' });
 
-        res.status(201).json({ token, user: { id: user.id, name: user.name, email: user.email, weight: user.weight, height: user.height, age: user.age, gender: user.gender, membershipType: user.membershipType } });
+        res.status(201).json({ 
+            token, 
+            user: { 
+                id: user.id, 
+                name: user.name, 
+                email: user.email, 
+                weight: user.weight, 
+                height: user.height, 
+                age: user.age, 
+                gender: user.gender, 
+                membershipType: user.membershipType,
+                caloriesToday: user.caloriesToday,
+                totalWorkouts: user.totalWorkouts
+            } 
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error during registration: ' + error.message });
@@ -42,7 +56,21 @@ exports.login = async (req, res) => {
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'supersecretgymkey', { expiresIn: '1h' });
 
-        res.json({ token, user: { id: user.id, name: user.name, email: user.email, weight: user.weight, height: user.height, age: user.age, gender: user.gender, membershipType: user.membershipType } });
+        res.json({ 
+            token, 
+            user: { 
+                id: user.id, 
+                name: user.name, 
+                email: user.email, 
+                weight: user.weight, 
+                height: user.height, 
+                age: user.age, 
+                gender: user.gender, 
+                membershipType: user.membershipType,
+                caloriesToday: user.caloriesToday,
+                totalWorkouts: user.totalWorkouts
+            } 
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error during login: ' + error.message });
@@ -61,5 +89,24 @@ exports.getProfile = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error fetching profile' });
+    }
+};
+
+exports.updateMembership = async (req, res) => {
+    const { membershipType } = req.body;
+
+    try {
+        const user = await User.findByPk(req.user.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.membershipType = membershipType;
+        await user.save();
+
+        res.json({ message: 'Membership updated successfully', user: { membershipType: user.membershipType } });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error updating membership' });
     }
 };

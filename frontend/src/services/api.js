@@ -20,6 +20,7 @@ export const authAPI = {
     register: (data) => api.post('/auth/register', data),
     login: (data) => api.post('/auth/login', data),
     getProfile: () => api.get('/auth/me'),
+    updateMembership: (membershipType) => api.put('/auth/membership', { membershipType }),
 };
 
 export const classAPI = {

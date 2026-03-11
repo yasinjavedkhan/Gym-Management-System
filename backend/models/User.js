@@ -46,6 +46,14 @@ const User = sequelize.define('User', {
     gender: {
         type: DataTypes.STRING,
         defaultValue: 'Not Specified'
+    },
+    caloriesToday: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
+    totalWorkouts: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     }
 });
 

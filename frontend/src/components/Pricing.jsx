@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Check, Smartphone, X, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { authAPI } from '../services/api';
 
 const Pricing = () => {
     const [isYearly, setIsYearly] = useState(false);
@@ -19,18 +20,31 @@ const Pricing = () => {
         setSelectedPlan(plan);
     };
 
-    const handleCheckout = (e) => {
+    const handleCheckout = async (e) => {
         e.preventDefault();
         setIsProcessing(true);
-        // Simulate an API call / Stripe process
-        setTimeout(() => {
+        try {
+            await authAPI.updateMembership(selectedPlan.name);
+            
+            // Update local storage user object
+            const currentToken = localStorage.getItem('token');
+            const response = await authAPI.getProfile();
+            localStorage.setItem('user', JSON.stringify(response.data));
+            
+            // Signal auth change to Navbar
+            window.dispatchEvent(new Event('authChange'));
+
             setIsProcessing(false);
             setPaymentSuccess(true);
             setTimeout(() => {
                 setPaymentSuccess(false);
                 setSelectedPlan(null);
             }, 3000);
-        }, 2000);
+        } catch (error) {
+            console.error("Payment/Update failed:", error);
+            setIsProcessing(false);
+            alert("Failed to update membership. Please try again.");
+        }
     };
 
     const plans = [

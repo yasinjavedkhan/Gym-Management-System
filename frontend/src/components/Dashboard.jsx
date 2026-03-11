@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { Activity, Zap, Target, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { authAPI, bookingAPI } from '../services/api';
 
 const data = [
     { name: 'Mon', weight: 80, calories: 2100 },
@@ -30,20 +31,49 @@ const StatCard = ({ title, value, icon: Icon, color }) => (
 const Dashboard = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const [nextSession, setNextSession] = useState('No Session');
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        const token = localStorage.getItem('token');
+        const fetchDashboardData = async () => {
+            const storedUser = localStorage.getItem('user');
+            const token = localStorage.getItem('token');
 
-        if (!storedUser || !token) {
-            navigate('/login');
-            return;
-        }
+            if (!storedUser || !token) {
+                navigate('/login');
+                return;
+            }
 
-        setUser(JSON.parse(storedUser));
+            try {
+                // Refresh profile to get latest stats
+                const profileRes = await authAPI.getProfile();
+                setUser(profileRes.data);
+                localStorage.setItem('user', JSON.stringify(profileRes.data));
+
+                // Get bookings for next session
+                const bookingsRes = await bookingAPI.getUserBookings();
+                const bookings = bookingsRes.data;
+                if (bookings && bookings.length > 0) {
+                    // Sort by date and find next one
+                    const now = new Date();
+                    const upcoming = bookings
+                        .filter(b => new Date(b.Class.startTime) > now)
+                        .sort((a, b) => new Date(a.Class.startTime) - new Date(b.Class.startTime));
+                    
+                    if (upcoming.length > 0) {
+                        const next = new Date(upcoming[0].Class.startTime);
+                        setNextSession(next.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+                    }
+                }
+            } catch (err) {
+                console.error("Dashboard fetch error:", err);
+                setUser(JSON.parse(storedUser));
+            }
+        };
+
+        fetchDashboardData();
     }, [navigate]);
 
-    if (!user) return null; // Wait for redirect check
+    if (!user) return null;
 
     return (
         <div className="pt-32 pb-20 bg-gym-gray min-h-screen">
@@ -65,10 +95,10 @@ const Dashboard = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                    <StatCard title="Weight" value="78.2 KG" icon={Activity} color="bg-electric-blue" />
-                    <StatCard title="Calories" value="1,900 kcal" icon={Zap} color="bg-gym-black" />
-                    <StatCard title="Next Session" value="4:00 PM" icon={Target} color="bg-electric-blue" />
-                    <StatCard title="Workouts" value="128 total" icon={TrendingUp} color="bg-gym-black" />
+                    <StatCard title="Weight" value={`${user.weight} KG`} icon={Activity} color="bg-electric-blue" />
+                    <StatCard title="Calories" value={`${user.caloriesToday.toLocaleString()} kcal`} icon={Zap} color="bg-gym-black" />
+                    <StatCard title="Next Session" value={nextSession} icon={Target} color="bg-electric-blue" />
+                    <StatCard title="Workouts" value={`${user.totalWorkouts} total`} icon={TrendingUp} color="bg-gym-black" />
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-8">
