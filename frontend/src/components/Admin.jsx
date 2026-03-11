@@ -107,6 +107,7 @@ const Admin = () => {
                                     <option value="HIIT">HIIT</option>
                                     <option value="Strength">Strength</option>
                                     <option value="Cardio">Cardio</option>
+                                    <option value="Mixed Martial Arts">Mixed Martial Arts</option>
                                 </select>
                             </div>
                             <div className="relative">
@@ -140,7 +141,7 @@ const Admin = () => {
                                                         key={trainer.id}
                                                         className="p-4 hover:bg-gym-gray cursor-pointer font-bold border-b border-gray-50 last:border-none"
                                                         onClick={() => {
-                                                            setClassData({ ...classData, trainerName: trainer.name });
+                                                            setClassData({ ...classData, trainerName: trainer.name, title: trainer.specialty });
                                                             setShowTrainerDropdown(false);
                                                         }}
                                                     >
