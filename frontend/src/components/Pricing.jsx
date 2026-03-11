@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { Check, Smartphone, X, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const Pricing = () => {
     const [isYearly, setIsYearly] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const navigate = useNavigate();
+
+    const handleSelectPlan = (plan) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+        setSelectedPlan(plan);
+    };
 
     const handleCheckout = (e) => {
         e.preventDefault();
@@ -72,7 +83,7 @@ const Pricing = () => {
                         >
                             <h3 className="text-2xl font-black uppercase mb-2">{plan.name}</h3>
                             <div className="flex items-end gap-1 mb-8">
-                                <span className="text-5xl font-black">${plan.price}</span>
+                                <span className="text-5xl font-black">₹{plan.price}</span>
                                 <span className="text-sm font-bold uppercase opacity-50 mb-2">/ {isYearly ? 'year' : 'month'}</span>
                             </div>
 
@@ -88,7 +99,7 @@ const Pricing = () => {
                             </ul>
 
                             <button
-                                onClick={() => setSelectedPlan(plan)}
+                                onClick={() => handleSelectPlan(plan)}
                                 className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest transition-all ${plan.highlight
                                     ? 'bg-electric-blue text-white hover:brightness-110 shadow-xl shadow-electric-blue/20'
                                     : 'bg-gym-black text-white hover:bg-electric-blue'
@@ -136,7 +147,7 @@ const Pricing = () => {
                                         </div>
                                         <h3 className="text-3xl font-black uppercase mb-2">Checkout</h3>
                                         <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">
-                                            {selectedPlan.name} Plan • ${selectedPlan.price}/{isYearly ? 'yr' : 'mo'}
+                                            {selectedPlan.name} Plan • ₹{selectedPlan.price}/{isYearly ? 'yr' : 'mo'}
                                         </p>
                                     </div>
 
@@ -170,7 +181,7 @@ const Pricing = () => {
                                                     Verifying Payment...
                                                 </>
                                             ) : (
-                                                `I Have Paid $${selectedPlan.price}`
+                                                `I Have Paid ₹${selectedPlan.price}`
                                             )}
                                         </button>
                                         <p className="text-center text-[10px] font-black uppercase tracking-widest text-gray-400 mt-4">Secured Transaction</p>
