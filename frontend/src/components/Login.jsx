@@ -33,7 +33,7 @@ const Login = () => {
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="max-w-md w-full bg-white p-12 rounded-[3.5rem] shadow-2xl"
+                className="max-w-md w-full bg-white p-8 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-2xl mx-4"
             >
                 <div className="text-center mb-10">
                     <h1 className="text-4xl font-black uppercase mb-2">Welcome Back</h1>

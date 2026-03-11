@@ -72,7 +72,7 @@ const Pricing = () => {
         <section className="py-32 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-5xl font-black uppercase mb-8">Membership Plans</h2>
+                    <h2 className="text-4xl md:text-5xl font-black uppercase mb-8">Membership Plans</h2>
 
                     <div className="flex items-center justify-center gap-4">
                         <span className={`text-sm font-bold uppercase transition-colors ${!isYearly ? 'text-gym-black' : 'text-gray-400'}`}>Monthly</span>
@@ -86,13 +86,13 @@ const Pricing = () => {
                     </div>
                 </div>
 
-                <div className="grid lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-12">
                     {plans.map((plan) => (
                         <div
                             key={plan.name}
-                            className={`p-10 rounded-[3rem] border-2 transition-all hover:scale-105 ${plan.highlight
-                                ? 'border-electric-blue bg-gym-black text-white shadow-2xl scale-105 z-10'
-                                : 'border-gray-100 bg-gym-gray'
+                            className={`p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] border-2 transition-all hover:scale-105 ${plan.highlight
+                                ? 'border-electric-blue bg-gym-black text-white shadow-2xl md:scale-105 z-10'
+                                : 'border-gray-100 bg-gym-gray scale-100'
                                 }`}
                         >
                             <h3 className="text-2xl font-black uppercase mb-2">{plan.name}</h3>
@@ -133,7 +133,7 @@ const Pricing = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="bg-white rounded-[3rem] p-8 md:p-12 w-full max-w-lg shadow-2xl relative"
+                            className="bg-white rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-12 w-full max-w-lg shadow-2xl relative"
                         >
                             {/* Close Button */}
                             {!isProcessing && !paymentSuccess && (

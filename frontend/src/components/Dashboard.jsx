@@ -78,9 +78,9 @@ const Dashboard = () => {
     return (
         <div className="pt-32 pb-20 bg-gym-gray min-h-screen">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
                     <div>
-                        <h1 className="text-5xl font-black uppercase mb-2">Member Dashboard</h1>
+                        <h1 className="text-4xl md:text-5xl font-black uppercase mb-2">Member Dashboard</h1>
                         <p className="text-gray-500 font-semibold text-lg italic">Welcome back, {user.name.split(' ')[0]}.</p>
                     </div>
                     <div className="flex gap-4">
@@ -94,15 +94,15 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12">
                     <StatCard title="Weight" value={`${user.weight} KG`} icon={Activity} color="bg-electric-blue" />
                     <StatCard title="Calories" value={`${user.caloriesToday.toLocaleString()} kcal`} icon={Zap} color="bg-gym-black" />
                     <StatCard title="Next Session" value={nextSession} icon={Target} color="bg-electric-blue" />
                     <StatCard title="Workouts" value={`${user.totalWorkouts} total`} icon={TrendingUp} color="bg-gym-black" />
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-8">
-                    <div className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100">
+                <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+                    <div className="bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] shadow-sm border border-gray-100">
                         <h3 className="text-2xl font-black uppercase mb-8">Weight Progress</h3>
                         <div className="h-[300px]">
                             <ResponsiveContainer width="100%" height="100%">
@@ -126,7 +126,7 @@ const Dashboard = () => {
                         </div>
                     </div>
 
-                    <div className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100">
+                    <div className="bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] shadow-sm border border-gray-100">
                         <h3 className="text-2xl font-black uppercase mb-8">Calorie Intake</h3>
                         <div className="h-[300px]">
                             <ResponsiveContainer width="100%" height="100%">

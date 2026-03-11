@@ -40,7 +40,7 @@ const Hero = () => {
                     transition={{ duration: 0.8 }}
                     className="flex flex-col justify-center"
                 >
-                    <h1 className="text-7xl md:text-[6rem] lg:text-[8rem] font-black leading-[0.9] uppercase mb-8">
+                    <h1 className="text-5xl sm:text-7xl md:text-[6rem] lg:text-[8rem] font-black leading-[0.9] uppercase mb-8">
                         Push <br />
                         Your <br />
                         <span className="text-electric-blue">Limits.</span>
@@ -49,7 +49,7 @@ const Hero = () => {
                         Experience the next generation of fitness. State-of-the-art equipment, world-class trainers, and a community built for performance.
                     </p>
                     <div className="flex gap-4">
-                        <button className="bg-gym-black text-white px-10 py-5 rounded-full font-black uppercase tracking-widest hover:bg-electric-blue transition-all shadow-xl hover:shadow-electric-blue/20">
+                        <button className="bg-gym-black text-white px-8 lg:px-10 py-4 lg:py-5 rounded-full font-black uppercase tracking-widest hover:bg-electric-blue transition-all shadow-xl hover:shadow-electric-blue/20 w-full sm:w-auto text-sm lg:text-base">
                             Start Today
                         </button>
                     </div>
@@ -61,7 +61,7 @@ const Hero = () => {
                     transition={{ duration: 1, delay: 0.2 }}
                     className="relative"
                 >
-                    <div className="bg-gym-black p-10 rounded-[3rem] text-white shadow-2xl">
+                    <div className="bg-gym-black p-6 sm:p-8 lg:p-10 rounded-[2rem] sm:rounded-[3rem] text-white shadow-2xl">
                         <div className="flex items-center gap-3 mb-8">
                             <Calculator className="text-electric-blue" size={24} />
                             <h3 className="text-2xl font-bold uppercase">BMI Calculator</h3>
@@ -134,7 +134,7 @@ const Hero = () => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
                                     <BMIRange label="Underweight" range="< 18.5" color="bg-yellow-500" />
                                     <BMIRange label="Healthy" range="18.5 - 24.9" color="bg-green-500" />
                                     <BMIRange label="Overweight" range="25.0 - 29.9" color="bg-orange-500" />

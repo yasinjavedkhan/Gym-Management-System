@@ -75,17 +75,17 @@ const Admin = () => {
         <div className="min-h-screen pt-32 pb-20 bg-gym-gray px-4">
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl font-black uppercase mb-4">Admin Panel</h1>
+                    <h1 className="text-4xl md:text-5xl font-black uppercase mb-4">Admin Panel</h1>
                     <p className="text-gray-500 font-bold uppercase tracking-widest text-sm">Add New Classes to Database</p>
                     <div className="w-20 h-2 bg-electric-blue mx-auto mt-6" />
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                     {/* Add Class Form */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-white p-10 md:p-12 rounded-[3.5rem] shadow-2xl border border-gray-100"
+                        className="bg-white p-6 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-2xl border border-gray-100"
                     >
                         <h2 className="text-3xl font-black uppercase mb-8 text-center">Add Class</h2>
                         {status.message && status.scope === 'class' && (
@@ -207,7 +207,7 @@ const Admin = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="bg-white p-10 md:p-12 rounded-[3.5rem] shadow-2xl border border-gray-100"
+                        className="bg-white p-6 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-2xl border border-gray-100"
                     >
                         <h2 className="text-3xl font-black uppercase mb-8 text-center">Add Trainer</h2>
                         {status.message && status.scope === 'trainer' && (

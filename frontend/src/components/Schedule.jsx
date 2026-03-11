@@ -70,7 +70,7 @@ const Schedule = () => {
         <section className="py-32 bg-gym-gray">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-5xl font-black uppercase mb-4">Class Schedule</h2>
+                    <h2 className="text-4xl md:text-5xl font-black uppercase mb-4">Class Schedule</h2>
                     <div className="w-20 h-2 bg-electric-blue mx-auto" />
                 </div>
 
@@ -98,7 +98,7 @@ const Schedule = () => {
                         <p className="text-xl font-bold text-gray-400 uppercase tracking-widest">No Classes Available</p>
                     </div>
                 ) : (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         <AnimatePresence mode="wait">
                             {groupedClasses[activeTab]?.map((item, index) => (
                                 <motion.div
@@ -107,7 +107,7 @@ const Schedule = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
                                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                                    className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all group border border-transparent hover:border-electric-blue/20"
+                                    className="bg-white p-6 md:p-8 rounded-[2rem] md:rounded-3xl shadow-sm hover:shadow-xl transition-all group border border-transparent hover:border-electric-blue/20"
                                 >
                                     <div className="flex justify-between items-start mb-6">
                                         <div className="bg-electric-blue/10 p-4 rounded-2xl group-hover:bg-electric-blue group-hover:text-white transition-colors">
