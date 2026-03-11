@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'https://gym-management-system-backend-kuzi.onrender.com/api';
+// Use localhost in development, and the live Render URL in production
+const isDevelopment = import.meta.env.MODE === 'development';
+const API_URL = isDevelopment 
+    ? 'http://localhost:10000/api' 
+    : 'https://gym-management-system-backend-kuzi.onrender.com/api';
 
 // Create an axios instance with auth header
 const api = axios.create({
@@ -21,6 +25,7 @@ export const authAPI = {
     login: (data) => api.post('/auth/login', data),
     getProfile: () => api.get('/auth/me'),
     updateMembership: (membershipType) => api.put('/auth/membership', { membershipType }),
+    updateProfile: (data) => api.put('/auth/profile', data),
 };
 
 export const classAPI = {

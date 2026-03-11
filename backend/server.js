@@ -8,6 +8,9 @@ const app = express();
 
 // Connect to Database
 // Require models so Sequelize knows about them before sync
+require('./models/User');
+require('./models/Class');
+require('./models/Booking');
 require('./models/Trainer');
 
 // Connect to Database
