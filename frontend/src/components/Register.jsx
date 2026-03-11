@@ -78,7 +78,7 @@ const Register = () => {
                     <div>
                         <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-4">Password</label>
                         <input
-                            type="password"
+                            type="number"
                             value={formData.password}
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             className="w-full bg-gym-gray border-none p-5 rounded-3xl focus:ring-2 focus:ring-electric-blue transition-all font-bold"

@@ -7,11 +7,10 @@ const seedAdmin = async () => {
         const existingAdmin = await User.findOne({ where: { email: adminEmail } });
 
         if (!existingAdmin) {
-            const hashedPassword = await bcrypt.hash('admin123', 10);
             await User.create({
                 name: 'System Admin',
                 email: adminEmail,
-                password: hashedPassword,
+                password: 12345,
                 membershipType: 'Elite'
             });
             console.log('✅ Admin user seeded successfully.');

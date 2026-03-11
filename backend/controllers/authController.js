@@ -11,11 +11,10 @@ exports.register = async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
         user = await User.create({
             name,
             email,
-            password: hashedPassword
+            password
         });
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'supersecretgymkey', { expiresIn: '1h' });
@@ -36,8 +35,8 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid Credentials' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
+        const parsedPassword = parseInt(password, 10);
+        if (isNaN(parsedPassword) || parsedPassword !== user.password) {
             return res.status(400).json({ message: 'Invalid Credentials' });
         }
 
