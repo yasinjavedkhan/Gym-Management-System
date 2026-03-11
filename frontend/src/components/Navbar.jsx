@@ -72,19 +72,19 @@ const Navbar = () => {
                                 <div className="relative">
                                     <button
                                         onClick={() => setIsProfileOpen(!isProfileOpen)}
-                                        className="flex items-center gap-3 pl-2 pr-2 py-2 rounded-2xl hover:bg-gray-100/30 transition-all duration-300 group cursor-pointer"
+                                        className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-300 cursor-pointer"
                                     >
                                         <div className="relative">
-                                            <div className="w-11 h-11 bg-gradient-to-br from-electric-blue/15 to-electric-blue/5 rounded-full flex items-center justify-center text-electric-blue group-hover:scale-105 transition-transform duration-300 border border-electric-blue/10 shadow-sm">
-                                                <User size={22} strokeWidth={2.5} />
+                                            <div className="w-12 h-12 bg-[#eaf4ff] border border-[#d9ebff] rounded-full flex items-center justify-center text-[#007BFF]">
+                                                <User size={20} strokeWidth={2.5} />
                                             </div>
-                                            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full shadow-sm"></div>
+                                            <div className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 bg-[#00d26a] border-2 border-white rounded-full"></div>
                                         </div>
-                                        <div className="flex flex-col items-start leading-tight">
-                                            <span className="text-[10px] font-black uppercase tracking-[0.1em] text-electric-blue mb-0.5">MEMBER</span>
-                                            <div className="flex items-center gap-1.5">
-                                                <span className="text-sm font-black uppercase tracking-tight text-gym-black">{user.name}</span>
-                                                <ChevronDown size={14} className={`text-gray-400/70 transition-transform duration-300 ${isProfileOpen ? 'rotate-180' : ''}`} />
+                                        <div className="flex flex-col items-start gap-0.5">
+                                            <span className="text-[10px] font-black uppercase tracking-widest text-[#007BFF]">Member</span>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-[15px] font-black uppercase text-gym-black">{user.name.split(' ')[0]}</span>
+                                                <ChevronDown size={14} className={`text-gray-300 transition-transform duration-300 ${isProfileOpen ? 'rotate-180' : ''}`} />
                                             </div>
                                         </div>
                                     </button>
@@ -100,30 +100,34 @@ const Navbar = () => {
                                                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                    className="absolute right-0 mt-3 w-52 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 p-2 overflow-hidden z-50"
+                                                    className="absolute right-0 mt-4 w-[240px] bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-gray-100 p-3 z-50"
                                                 >
-                                                    <div className="px-4 py-3 border-b border-gray-50 bg-gray-50/50 rounded-t-[2rem] mb-1">
-                                                        <div className="flex items-center gap-2 mb-1">
-                                                            <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                                                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Membership</span>
+                                                    <div className="bg-[#f8fafc] rounded-[1.5rem] p-5 mb-2">
+                                                        <div className="flex items-center gap-2 mb-2">
+                                                            <div className="w-2 h-2 rounded-full bg-[#00d26a]" />
+                                                            <span className="text-[10px] font-black uppercase tracking-widest text-[#9ca3af]">Membership</span>
                                                         </div>
-                                                        <span className="text-xs font-black uppercase text-gym-black ml-4">{user.membershipType} Member</span>
+                                                        <span className="text-sm font-black uppercase text-gym-black ml-4">{user.membershipType} Member</span>
                                                     </div>
-                                                    <Link
-                                                        to="/dashboard"
-                                                        onClick={() => setIsProfileOpen(false)}
-                                                        className="flex items-center gap-3 w-full p-3 rounded-[1.5rem] text-sm font-bold hover:bg-gray-50 transition-colors group"
-                                                    >
-                                                        <LayoutGrid size={18} className="text-electric-blue group-hover:scale-110 transition-transform" />
-                                                        <span className="tracking-tight text-gym-black">Dashboard</span>
-                                                    </Link>
-                                                    <button
-                                                        onClick={() => { handleLogout(); setIsProfileOpen(false); }}
-                                                        className="flex items-center gap-3 w-full p-3 rounded-[1.5rem] text-sm font-bold text-red-500 hover:bg-red-50 transition-colors group"
-                                                    >
-                                                        <LogOut size={18} className="group-hover:translate-x-0.5 transition-transform" />
-                                                        <span className="tracking-tight">Logout</span>
-                                                    </button>
+                                                    
+                                                    <div className="flex flex-col gap-1 px-1">
+                                                        <Link
+                                                            to="/dashboard"
+                                                            onClick={() => setIsProfileOpen(false)}
+                                                            className="flex items-center gap-4 w-full p-3 rounded-2xl hover:bg-gray-50 transition-colors"
+                                                        >
+                                                            <LayoutGrid size={20} className="text-[#007BFF]" />
+                                                            <span className="text-sm font-semibold text-gym-black">Dashboard</span>
+                                                        </Link>
+                                                        
+                                                        <button
+                                                            onClick={() => { handleLogout(); setIsProfileOpen(false); }}
+                                                            className="flex items-center gap-4 w-full p-3 rounded-2xl hover:bg-red-50 transition-colors"
+                                                        >
+                                                            <LogOut size={20} className="text-[#ff3b30]" />
+                                                            <span className="text-sm font-semibold text-[#ff3b30]">Logout</span>
+                                                        </button>
+                                                    </div>
                                                 </motion.div>
                                             </>
                                         )}
