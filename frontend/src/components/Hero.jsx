@@ -30,19 +30,21 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative h-screen flex items-center overflow-hidden bg-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 grid lg:grid-cols-2 gap-12 items-center w-full">
+        <section className="relative h-screen flex items-center overflow-hidden bg-white pt-20">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-16 grid lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full h-full">
 
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
+                    className="flex flex-col justify-center"
                 >
-                    <h1 className="text-7xl md:text-8xl font-black leading-tight uppercase mb-6">
-                        Push Your <br />
+                    <h1 className="text-7xl md:text-[6rem] lg:text-[8rem] font-black leading-[0.9] uppercase mb-8">
+                        Push <br />
+                        Your <br />
                         <span className="text-electric-blue">Limits.</span>
                     </h1>
-                    <p className="text-xl text-gray-600 mb-8 max-w-lg">
+                    <p className="text-xl text-gray-500 mb-10 max-w-lg leading-relaxed">
                         Experience the next generation of fitness. State-of-the-art equipment, world-class trainers, and a community built for performance.
                     </p>
                     <div className="flex gap-4">
