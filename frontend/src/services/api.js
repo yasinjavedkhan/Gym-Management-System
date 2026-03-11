@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://gym-management-system-backend-kuzi.onrender.com/api';
 
 // Create an axios instance with auth header
 const api = axios.create({
