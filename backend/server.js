@@ -11,7 +11,10 @@ const app = express();
 require('./models/Trainer');
 
 // Connect to Database
-connectDB();
+connectDB().then(() => {
+    const seedAdmin = require('./utils/seed');
+    seedAdmin();
+});
 
 // Middleware
 app.use(helmet());
