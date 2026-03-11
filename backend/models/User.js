@@ -20,7 +20,7 @@ const User = sequelize.define('User', {
         }
     },
     password: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     membershipType: {
