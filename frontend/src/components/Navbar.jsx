@@ -102,6 +102,13 @@ const Navbar = () => {
                                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                                     className="absolute right-0 mt-3 w-52 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 p-2 overflow-hidden z-50"
                                                 >
+                                                    <div className="px-4 py-4 border-b border-gray-50 mb-1 bg-gray-50/50 rounded-t-[2rem]">
+                                                        <div className="flex items-center gap-2 mb-1">
+                                                            <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                                                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Membership</span>
+                                                        </div>
+                                                        <span className="text-xs font-black uppercase text-gym-black ml-4">{user.membershipType} Member</span>
+                                                    </div>
                                                     <Link
                                                         to="/dashboard"
                                                         onClick={() => setIsProfileOpen(false)}
