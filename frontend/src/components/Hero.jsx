@@ -31,8 +31,8 @@ const Hero = () => {
     const category = getBMICategory(bmi);
 
     return (
-        <section className="relative h-screen flex items-center overflow-hidden bg-white pt-20">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-16 grid lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full h-full">
+        <section className="relative min-h-screen flex items-center overflow-hidden bg-white pt-32 pb-20">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-16 grid lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full">
                 {/* ... Left Side Content (Push Your Limits) stays same ... */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
