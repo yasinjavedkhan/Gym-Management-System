@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
-import { Activity, Zap, Target, TrendingUp, Plus, X, Loader2, Check } from 'lucide-react';
+import { Activity, Zap, Target, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { authAPI, bookingAPI } from '../services/api';
 
@@ -32,15 +32,6 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [nextSession, setNextSession] = useState('No Session');
-    
-    // Log Activity Modal State
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isUpdating, setIsUpdating] = useState(false);
-    const [logData, setLogData] = useState({
-        weight: '',
-        caloriesBurned: '',
-        logWorkout: true
-    });
 
     useEffect(() => {
         const fetchDashboardData = async () => {
@@ -82,29 +73,6 @@ const Dashboard = () => {
         fetchDashboardData();
     }, [navigate]);
 
-    const handleLogActivity = async (e) => {
-        e.preventDefault();
-        setIsUpdating(true);
-        try {
-            const dataToUpdate = {
-                logWorkout: logData.logWorkout
-            };
-            if (logData.weight) dataToUpdate.weight = parseFloat(logData.weight);
-            if (logData.caloriesBurned) dataToUpdate.caloriesBurned = parseInt(logData.caloriesBurned);
-
-            const res = await authAPI.updateProfile(dataToUpdate);
-            setUser(res.data.user);
-            localStorage.setItem('user', JSON.stringify(res.data.user));
-            setIsModalOpen(false);
-            setLogData({ weight: '', caloriesBurned: '', logWorkout: true });
-        } catch (error) {
-            console.error("Failed to update profile:", error);
-            alert("Failed to log activity. Please try again.");
-        } finally {
-            setIsUpdating(false);
-        }
-    };
-
     if (!user) return null;
 
     return (
@@ -116,21 +84,13 @@ const Dashboard = () => {
                         <p className="text-gray-500 font-semibold text-lg italic">Welcome back, {user.name.split(' ')[0]}.</p>
                     </div>
                     <div className="flex gap-4">
-                        <div className="bg-white px-6 py-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3 hidden sm:flex">
+                        <div className="bg-white px-6 py-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
                             <Target className="text-electric-blue" />
                             <div>
                                 <span className="block text-[10px] font-black uppercase opacity-40">Membership</span>
                                 <span className="font-bold text-sm uppercase">{user.membershipType} MEMBER</span>
                             </div>
                         </div>
-                        <button 
-                            onClick={() => setIsModalOpen(true)}
-                            className="bg-electric-blue text-white px-6 py-4 rounded-2xl shadow-sm hover:brightness-110 flex items-center gap-2 font-black uppercase tracking-widest transition-all"
-                        >
-                            <Plus size={20} />
-                            <span className="hidden sm:inline">Log Progress</span>
-                            <span className="sm:hidden">Log</span>
-                        </button>
                     </div>
                 </div>
 
@@ -190,79 +150,6 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Log Activity Modal */}
-            <AnimatePresence>
-                {isModalOpen && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-gym-black/80 backdrop-blur-sm">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="bg-white rounded-[2rem] p-8 md:p-10 w-full max-w-md shadow-2xl relative"
-                        >
-                            <button
-                                onClick={() => setIsModalOpen(false)}
-                                className="absolute top-6 right-6 text-gray-400 hover:text-gym-black transition-colors"
-                            >
-                                <X size={24} />
-                            </button>
-
-                            <div className="mb-8">
-                                <h3 className="text-2xl font-black uppercase mb-2">Log Daily Progress</h3>
-                                <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">
-                                    Update your stats to track growth
-                                </p>
-                            </div>
-
-                            <form onSubmit={handleLogActivity} className="space-y-6">
-                                <div>
-                                    <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-4">Current Weight (KG)</label>
-                                    <input
-                                        type="number"
-                                        step="0.1"
-                                        value={logData.weight}
-                                        onChange={(e) => setLogData({ ...logData, weight: e.target.value })}
-                                        className="w-full bg-gym-gray border-none p-4 rounded-2xl focus:ring-2 focus:ring-electric-blue transition-all font-bold"
-                                        placeholder={`Current: ${user.weight || 0} KG`}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-4">Calories Burned Today</label>
-                                    <input
-                                        type="number"
-                                        value={logData.caloriesBurned}
-                                        onChange={(e) => setLogData({ ...logData, caloriesBurned: e.target.value })}
-                                        className="w-full bg-gym-gray border-none p-4 rounded-2xl focus:ring-2 focus:ring-electric-blue transition-all font-bold"
-                                        placeholder="+ Add kCal"
-                                    />
-                                </div>
-                                <div className="flex items-center gap-3 p-4 bg-gym-gray rounded-2xl cursor-pointer" onClick={() => setLogData({...logData, logWorkout: !logData.logWorkout})}>
-                                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-colors ${logData.logWorkout ? 'bg-green-500' : 'bg-gray-300'}`}>
-                                        {logData.logWorkout && <Check size={16} className="text-white" />}
-                                    </div>
-                                    <span className="font-bold text-sm tracking-tight">Count as completed workout (+1)</span>
-                                </div>
-
-                                <button
-                                    disabled={isUpdating}
-                                    type="submit"
-                                    className="w-full bg-gym-black text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-electric-blue transition-all shadow-xl mt-4 flex justify-center items-center gap-2"
-                                >
-                                    {isUpdating ? (
-                                        <>
-                                            <Loader2 className="animate-spin" size={20} />
-                                            Saving...
-                                        </>
-                                    ) : (
-                                        'Save Progress'
-                                    )}
-                                </button>
-                            </form>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
         </div>
     );
 };

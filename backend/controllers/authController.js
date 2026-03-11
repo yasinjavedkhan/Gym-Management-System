@@ -110,25 +110,3 @@ exports.updateMembership = async (req, res) => {
         res.status(500).json({ message: 'Server error updating membership' });
     }
 };
-
-exports.updateProfile = async (req, res) => {
-    const { weight, caloriesBurned, logWorkout } = req.body;
-
-    try {
-        const user = await User.findByPk(req.user.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        if (weight !== undefined) user.weight = weight;
-        if (caloriesBurned !== undefined) user.caloriesToday += parseInt(caloriesBurned) || 0;
-        if (logWorkout) user.totalWorkouts += 1;
-
-        await user.save();
-
-        res.json({ message: 'Profile updated successfully', user });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error updating profile' });
-    }
-};

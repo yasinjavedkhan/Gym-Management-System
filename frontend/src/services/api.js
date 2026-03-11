@@ -1,10 +1,6 @@
 import axios from 'axios';
 
-// Use localhost when running locally, and the live Render URL otherwise
-const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const API_URL = isLocalhost 
-    ? 'http://localhost:10000/api' 
-    : 'https://gym-management-system-backend-kuzi.onrender.com/api';
+const API_URL = 'https://gym-management-system-backend-kuzi.onrender.com/api';
 
 // Create an axios instance with auth header
 const api = axios.create({
@@ -25,7 +21,6 @@ export const authAPI = {
     login: (data) => api.post('/auth/login', data),
     getProfile: () => api.get('/auth/me'),
     updateMembership: (membershipType) => api.put('/auth/membership', { membershipType }),
-    updateProfile: (data) => api.put('/auth/profile', data),
 };
 
 export const classAPI = {
