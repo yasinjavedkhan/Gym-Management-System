@@ -36,19 +36,19 @@ const Pricing = () => {
     const plans = [
         {
             name: 'Basic',
-            price: isYearly ? 290 : 29,
+            price: isYearly ? 9599 : 999,
             features: ['Access to Gym Floor', 'Locker Room Access', '1 Group Class/Month', 'Basic Support'],
             highlight: false
         },
         {
             name: 'Pro',
-            price: isYearly ? 590 : 59,
+            price: isYearly ? 14399 : 1499,
             features: ['24/7 Access', 'Unlimited Group Classes', 'Personal Training Session', 'Nutrition Guide', 'Priority Support'],
             highlight: true
         },
         {
             name: 'Elite',
-            price: isYearly ? 990 : 99,
+            price: isYearly ? 19199 : 1999,
             features: ['All Pro Features', 'Dedicated Coach', 'Massage & Spa Access', 'Guest Passes', 'Exclusive Events'],
             highlight: false
         }
