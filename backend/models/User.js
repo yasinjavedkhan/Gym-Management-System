@@ -33,15 +33,15 @@ const User = sequelize.define('User', {
     },
     weight: {
         type: DataTypes.FLOAT,
-        defaultValue: 70
+        allowNull: true
     },
     height: {
         type: DataTypes.FLOAT,
-        defaultValue: 175
+        allowNull: true
     },
     age: {
         type: DataTypes.INTEGER,
-        defaultValue: 25
+        allowNull: true
     },
     gender: {
         type: DataTypes.STRING,
