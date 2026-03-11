@@ -26,6 +26,7 @@ const Register = () => {
             const response = await authAPI.register(formData);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
+            window.dispatchEvent(new Event('authChange'));
             navigate('/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed. Please try again.');

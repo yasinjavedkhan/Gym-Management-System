@@ -22,17 +22,27 @@ const Navbar = () => {
             }
         };
 
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-            fetchProfile();
-        }
+        const checkAuth = () => {
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                setUser(JSON.parse(storedUser));
+                fetchProfile();
+            } else {
+                setUser(null);
+            }
+        };
+
+        checkAuth();
+
+        window.addEventListener('authChange', checkAuth);
+        return () => window.removeEventListener('authChange', checkAuth);
     }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setUser(null);
+        window.dispatchEvent(new Event('authChange'));
         navigate('/');
     };
 
