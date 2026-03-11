@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Use localhost in development, and the live Render URL in production
-const isDevelopment = import.meta.env.MODE === 'development';
-const API_URL = isDevelopment 
+// Use localhost when running locally, and the live Render URL otherwise
+const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_URL = isLocalhost 
     ? 'http://localhost:10000/api' 
     : 'https://gym-management-system-backend-kuzi.onrender.com/api';
 
